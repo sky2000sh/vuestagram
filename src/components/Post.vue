@@ -1,14 +1,18 @@
 <template>
     <div class="post">
         <div class="post-header">
+            <!-- 프로필 사진 -->
             <div class="profile"></div>
-            <span class="profile-name">ChanKim</span>
+            <span class="profile-name">{{postData.name}}</span> <!-- ChanKim --> 
         </div>
-        <div class="post-body"></div>
+        <!-- 포스팅 사진 -->
+        <!-- :style=" ~~ " 집어넣을 때 object 자료도 가능 -->
+        <!-- 백틱( `` ) 기호로 문자를 만들면 `문자${변수}문자`  가 가능해진다. -->
+        <div class="post-body" :style="{ backgroundImage : `url(${postData.postImage})` }"></div>
         <div class="post-content">
-            <p>43 Likes</p>
-            <p><strong>글쓴이아이디</strong> 임시내용</p>
-            <p class="date">May 15</p>
+            <p>{{postData.likes}}</p>
+            <p><strong>{{postData.name}}</strong> {{postData.content}}</p>
+            <p class="date">{{postData.date}}</p>
         </div>
     </div> 
 </template>
@@ -19,6 +23,10 @@ export default {
     name: 'Post',
     components: {
 
+    },
+
+    props : {
+        postData : Object
     }
 }
 </script>

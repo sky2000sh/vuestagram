@@ -1,8 +1,9 @@
 <template>
     <div>
-        <Post/>
-        <Post/>
-        <Post/>
+        <!-- <Post :postData="postData[0]"/>
+        <Post :postData="postData[1]"/>
+        <Post :postData="postData[2]"/> -->
+        <Post :postData="postData[i]" v-for="(a,i) in postData" :key="i"/>
     </div>
 </template>
 
@@ -14,6 +15,10 @@ export default {
     name: 'Container',
     components: {
         Post : Post
+    },
+
+    props : {
+        postData : Object,
     }
 }
 </script>

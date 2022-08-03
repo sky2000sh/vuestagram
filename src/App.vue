@@ -9,7 +9,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container />
+  <Container :postData="postData"/>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -21,6 +21,7 @@
 
 <script>
 import Container from './components/Container'
+import postdata from './assets/postdata'
 
 export default {
   name: 'App',
@@ -30,7 +31,7 @@ export default {
 
   data() {
     return {
-      
+      postData : postdata
     }
   }
 }
