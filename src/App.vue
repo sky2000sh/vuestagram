@@ -58,7 +58,7 @@ export default {
 
       // axios 개발 몇가지 더!
       // post() 함수 => 내가 요청한 데이터를 전송하게 해준다.
-      let url = 'https://codingapple1.github.io/vue/more0.jso'
+      let url = 'https://codingapple1.github.io/vue/more0.json'
       axios.post(url, {name : 'kim'})
       .then(
         console.log('여기는 성공!!!')
