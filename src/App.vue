@@ -4,12 +4,13 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step == 1" @click="step++">Next</li>
+      <li v-if="step == 2" @click="publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :postData="postData" :step="step" />
+  <Container :images="images" :postData="postData" :step="step" />
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -47,6 +48,7 @@ export default {
     return {
       postData : postdata,
       step : 0,
+      images : '',
     }
   },
 
@@ -85,10 +87,10 @@ export default {
     },
 
     upload(e) {
-      let fileName = e.target.files;
+      let fileName = e.target.files
 
-      let url = URL.createObjectURL(fileName[0]);
-      console.log(url);
+      let url = URL.createObjectURL(fileName[0])
+      console.log(url)
 
       //console.log(fileName[0].type);
       //console.log(fileName);
@@ -98,7 +100,25 @@ export default {
       //length : 1
       //[[Prototype]] : FileList
 
-      this.step++;
+      this.images = url
+
+      // 다음 스텝(이미지 페이지)으로 넘어가기
+      this.step++
+    },
+
+    publish() {
+      let myPosts = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: "`background-image:url(${images})`",
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: "",
+        filter: "perpetua"
+      }
+      this.postData.unshift(myPosts)  // unshift => 왼쪽에 array에 자료를 집어넣어준다.
+      this.step = 0
     }
     
   },
