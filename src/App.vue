@@ -10,7 +10,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :images="images" :postData="postData" :step="step" />
+  <Container @write="writings = $event" :images="images" :postData="postData" :step="step" />
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -49,6 +49,7 @@ export default {
       postData : postdata,
       step : 0,
       images : '',
+      writings : '',
     }
   },
 
@@ -110,11 +111,11 @@ export default {
       let myPosts = {
         name: "Kim Hyun",
         userImage: "https://placeimg.com/100/100/arch",
-        postImage: "`background-image:url(${images})`",
+        postImage: this.images,
         likes: 36,
         date: "May 15",
         liked: false,
-        content: "",
+        content: this.writings,
         filter: "perpetua"
       }
       this.postData.unshift(myPosts)  // unshift => 왼쪽에 array에 자료를 집어넣어준다.

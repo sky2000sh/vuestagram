@@ -23,7 +23,11 @@
             <!-- 글작성페이지 -->
             <div class="upload-image" :style="`background-image:url(${images})`"></div>
             <div class="write">
-                <textarea class="write-box">write!</textarea>
+                <!-- 일단 유저가 입력한 글을 거기 집어넣으려면 일단 유저가 입력한 글은 Container.vue에 있습니다.
+                    거기 <textarea>에 입력할 수 있는게 거기 입력한 글을 App.vue로 보내려면
+                    저는 다음과 같이 커스텀이벤트 문법으로 App.vue에게 사용자가 입력한 글을 전송했습니다.  -->
+                <textarea @input="$emit('write', $event.target.value)"
+                            class="write-box"> write! </textarea>
             </div>
         </div>
 
