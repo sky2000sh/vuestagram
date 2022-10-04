@@ -11,11 +11,13 @@
             <!-- 필터선택페이지 -->
             <div class="upload-image" :style="`background-image:url(${images})`"></div>
             <div class="filters">
+                <!-- <div class="filter-1"></div>
                 <div class="filter-1"></div>
                 <div class="filter-1"></div>
                 <div class="filter-1"></div>
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
+                <div class="filter-1"></div> -->
+
+                <FilterBox :filters="filters" :images="images" v-for="(filters,i) in filters" :key="i">  </FilterBox>
             </div>
         </div>
 
@@ -36,18 +38,28 @@
 
 <script>
 import Post from './Post'
+import FilterBox from './FilterBox'
 
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'Container',
     components: {
-        Post : Post
+        Post : Post,
+        FilterBox : FilterBox
     },
 
     props : {
         postData : Object,
         step : Number,
         images : String,
+    },
+
+    data() {
+        return {
+            filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+                        "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+                        "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+        }
     }
 }
 </script>
