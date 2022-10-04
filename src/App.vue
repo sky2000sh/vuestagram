@@ -14,7 +14,9 @@
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" type="file" id="file" class="inputfile" />
+      <!-- @change="upload" multiple => 을 사용하면 이미지를 한개뿐아니라 여러개를 shift를 사용해서 선택할 수 있는 명령어 -->
+      <!-- accept="image/*" 이미지만 받겠습니다 => 사실상 모든 파일들을 업로드할 수 있기 때문에 실질적인 해결방법은 아니다. -->
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -80,6 +82,23 @@ export default {
         console.log('여기는 실패!!!')
       )
       // 위의 요청이 성공시는 then()   /   실패시는 catch() 함수에 메시지를 담는다.
+    },
+
+    upload(e) {
+      let fileName = e.target.files;
+
+      let url = URL.createObjectURL(fileName[0]);
+      console.log(url);
+
+      //console.log(fileName[0].type);
+      //console.log(fileName);
+      //console.log(fileName[0]);
+      // FileList {0: File, length: 1}
+      //0 : File {name: '스크린샷 2022-07-26 오후 6.58.51.png', lastModified: 1658829533991, lastModifiedDate: Tue Jul 26 2022 18:58:53 GMT+0900 (한국 표준시), webkitRelativePath: '', size: 1592590, …}
+      //length : 1
+      //[[Prototype]] : FileList
+
+      this.step++;
     }
     
   },
