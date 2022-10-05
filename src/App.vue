@@ -11,8 +11,14 @@
   </div>
 
   <h4> Bonjour, {{ $store.state.name }} </h4>
+    <h4> 당신은 {{ $store.state.age }} 세 입니다.</h4>
   <!-- <button @click="$store.state.name = 'PARK' "> 버튼 </button>
   이것도 가능하지만 컴포넌트 안에서 직접 수정 금지 => vuex 국룰   -->
+
+  <button @click="$store.commit('changeName')"> 이름변경 </button>
+  <!-- 그래서 store.js 에게 수정부탁을 하려면,
+        $store.commit('함수명') 으로 작성가능하다.   -->
+  <button @click="$store.commit('changeAge')"> 나이변경 </button>
 
   <Container @write="writings = $event" :images="images" :postData="postData" :step="step" />
   <button @click="more">더보기</button>
