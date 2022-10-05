@@ -3,7 +3,10 @@
         <div class="post-header">
             <!-- 프로필 사진 -->
             <div class="profile"></div>
-            <span class="profile-name">{{postData.name}}</span> <!-- ChanKim --> 
+            <span class="profile-name">{{postData.name}}</span> <!-- ChanKim -->
+            <slot name="a"></slot>
+            <slot name="b"></slot>
+            <slot name="c"></slot>
         </div>
         <!-- 포스팅 사진 -->
         <!-- :style=" ~~ " 집어넣을 때 object 자료도 가능 -->
