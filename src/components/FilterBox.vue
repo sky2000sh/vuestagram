@@ -18,6 +18,13 @@
             2. 부모 페이지
             <template v-slot:a> 데이터1 </template>
             <template v-slot:b> 데이터2 </template> -->
+
+        <button @click="fire"> 선택 </button>
+        <!-- mitt 라이브러리를 통해 부모/형제 파일 간 데이터 전송하는 법
+        1. 발사/발신 후
+            this.emitter.emit()        
+        2. 해당 vue 페이지에서 수신하면 된다.
+            this.emitter.on()           -->
     </div>
     
 </template>
@@ -29,7 +36,14 @@ export default {
     props: {
         images : String,
         filters : Object,
-    }
+    },
+
+    methods: {
+        fire() {
+            this.emitter.emit('sendFilter', '데이터임당')
+        }    
+    },
+    
 }
 </script>
 

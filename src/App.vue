@@ -38,6 +38,9 @@ import postdata from './assets/postdata'
 // 2022년 8월 8일 yarn add axios 추가
 import axios from 'axios'
 
+// 2022년 10월 5일 yarn add mitt 추가
+// 추가 후, main.js에 import 추가해줬음
+
 export default {
   name: 'App',
   components: {
@@ -51,6 +54,13 @@ export default {
       images : '',
       writings : '',
     }
+  },
+
+  // 22년 10월 5일 mitt 라이브러리를 활용해 mounted()에 데이터를 넘기기
+  mounted() {
+    this.emitter.on('sendFilter', (a) => {
+      console.log('여기 app.vue의 a :', a)
+    })
   },
 
   methods: {
