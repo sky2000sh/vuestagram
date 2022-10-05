@@ -11,7 +11,7 @@
         <!-- 포스팅 사진 -->
         <!-- :style=" ~~ " 집어넣을 때 object 자료도 가능 -->
         <!-- 백틱( `` ) 기호로 문자를 만들면 `문자${변수}문자`  가 가능해진다. -->
-        <div class="post-body" :style="{ backgroundImage : `url(${postData.postImage})` }"></div>
+        <div :class="postData.filter + ' post-body'" :style="{ backgroundImage : `url(${postData.postImage})` }"></div>
         <div class="post-content">
             <p>{{postData.likes}}</p>
             <p><strong>{{postData.name}}</strong> {{postData.content}}</p>
@@ -30,7 +30,7 @@ export default {
 
     props : {
         postData : Object
-    }
+    },
 }
 </script>
 

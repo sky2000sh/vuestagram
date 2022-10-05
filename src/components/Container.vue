@@ -8,8 +8,8 @@
         </div>
 
         <div v-if="step == 1">
-            <!-- 필터선택페이지 -->
-            <div class="upload-image" :style="`background-image:url(${images})`"></div>
+            <!-- 필터선택페이지이면서 최종 선택되는 큰 이미지 -->
+            <div :class="selectedFilter" class="upload-image" :style="`background-image:url(${images})`"></div>
             <div class="filters">
                 <!-- <div class="filter-1"></div>
                 <div class="filter-1"></div>
@@ -41,7 +41,7 @@
 
         <div v-if="step == 2">
             <!-- 글작성페이지 -->
-            <div class="upload-image" :style="`background-image:url(${images})`"></div>
+            <div :class="selectedFilter" class="upload-image" :style="`background-image:url(${images})`"></div>
             <div class="write">
                 <!-- 일단 유저가 입력한 글을 거기 집어넣으려면 일단 유저가 입력한 글은 Container.vue에 있습니다.
                     거기 <textarea>에 입력할 수 있는게 거기 입력한 글을 App.vue로 보내려면
@@ -77,8 +77,17 @@ export default {
             filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
                         "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
                         "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+            selectedFilter : '',
         }
-    }
+    },
+
+    mounted() {
+        this.emitter.on('sendFilter', (a) => {
+            // console.log('여기 container.vue의 a :', a)
+            this.selectedFilter = a
+
+        })
+    },
 }
 </script>
 

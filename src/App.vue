@@ -53,13 +53,15 @@ export default {
       step : 0,
       images : '',
       writings : '',
+      selectedFilter : '',
     }
   },
 
   // 22년 10월 5일 mitt 라이브러리를 활용해 mounted()에 데이터를 넘기기
   mounted() {
     this.emitter.on('sendFilter', (a) => {
-      console.log('여기 app.vue의 a :', a)
+      // console.log('여기 app.vue의 a :', a)
+      this.selectedFilter = a 
     })
   },
 
@@ -126,7 +128,8 @@ export default {
         date: "May 15",
         liked: false,
         content: this.writings,
-        filter: "perpetua"
+        //filter: "perpetua"
+        filter: this.selectedFilter
       }
       this.postData.unshift(myPosts)  // unshift => 왼쪽에 array에 자료를 집어넣어준다.
       this.step = 0
