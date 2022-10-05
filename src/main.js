@@ -12,5 +12,9 @@ app.config.globalProperties.emitter = emitter
 // 다만 this.axios.get 이렇게 명령어를 쳐야한다.
 // => 즉, 부모/형제 vue 파일에서 import axios 할 필요 없이 this.axios.get / this.axios 로 사용이 가능하다.
 
+// vuex 라이브러리를 추가해주기 (22/10/05) => vuex 라이브러리 setting
+import store from './store.js'
+
 // createApp(App).mount('#app') => 맨 밑에 있던 이거 대신 (22/10/05)
-app.mount('#app')  // 이렇게 바꾼 이유는 line 6에 createApp속성을 변수로 담았기 때문.
+// app.mount('#app')  // 이렇게 바꾼 이유는 line 6에 createApp속성을 변수로 담았기 때문.
+app.use(store).mount('#app')

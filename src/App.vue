@@ -10,6 +10,10 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <h4> Bonjour, {{ $store.state.name }} </h4>
+  <!-- <button @click="$store.state.name = 'PARK' "> 버튼 </button>
+  이것도 가능하지만 컴포넌트 안에서 직접 수정 금지 => vuex 국룰   -->
+
   <Container @write="writings = $event" :images="images" :postData="postData" :step="step" />
   <button @click="more">더보기</button>
 
@@ -40,6 +44,12 @@ import axios from 'axios'
 
 // 2022년 10월 5일 yarn add mitt 추가
 // 추가 후, main.js에 import 추가해줬음
+
+// vuex 설치
+// 2022년 10월 5일 yarn add vuex@next --save 추가해서 vuex4를 설치
+// 추가 후, src폴더 안에 store.js 파일을 생성했음 (파일 명은 임의지만 보면 store)
+// 추가 후, main.js에 import store 추가해줬음
+
 
 export default {
   name: 'App',
