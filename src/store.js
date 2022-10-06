@@ -9,6 +9,9 @@ const store = createStore({
             name : 'LEE',
             age : 20,
             likes : 30,
+            likesPlurial : [30, 40, 50],
+            pushedLike : false,  // 현재 상태를 저장하는 곳
+            pushedLikePlurial : [false, false, false],  // 현재 상태를 저장하는 곳
         }
     },
 
@@ -17,6 +20,7 @@ const store = createStore({
         changeName(state) {
             state.name = 'PARK'
         },
+
         changeAge(state) {
             // state.age = '40'
             // state.age = state.age + 1
@@ -27,6 +31,17 @@ const store = createStore({
         //     // state.age = state.age + 1
         //     state.age += index  //  => 이러면 나이변경하는 10만큼씩 계속 증가한다.
         // },
+
+        like(state) {
+            if(state.pushedLike == false) {
+                state.likes++
+                state.pushedLike = true
+            } else {
+                state.likes--
+                state.pushedLike = false
+            }
+            
+        },
     },
 })
 

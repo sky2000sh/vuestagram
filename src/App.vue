@@ -19,6 +19,7 @@
   <!-- 그래서 store.js 에게 수정부탁을 하려면,
         $store.commit('함수명') 으로 작성가능하다.   -->
   <button @click="$store.commit('changeAge')"> 나이변경 </button>
+  <!-- <button @click="$store.commit('changeAge', 10)"> 나이변경 </button> -->
 
   <Container @write="writings = $event" :images="images" :postData="postData" :step="step" />
   <button @click="more">더보기</button>
