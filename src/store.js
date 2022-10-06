@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { createStore } from 'vuex'
 
 const store = createStore({
@@ -12,10 +13,11 @@ const store = createStore({
             likesPlurial : [30, 40, 50],
             pushedLike : false,  // 현재 상태를 저장하는 곳
             pushedLikePlurial : [false, false, false],  // 현재 상태를 저장하는 곳
+            more : {},
         }
     },
 
-    // mutations => state 수정하는 방법을 정의하는 곳
+    // mutations => state 수정(변경)하는 방법을 정의하는 곳!
     mutations : {
         changeName(state) {
             state.name = 'PARK'
@@ -40,9 +42,27 @@ const store = createStore({
                 state.likes--
                 state.pushedLike = false
             }
-            
+        },
+
+        setMore(state, param) {
+            state.more = param
         },
     },
+
+    // actions => 서버에서 ajax를 통해 전달되는 곳!
+    actions : {
+        getData(context) {
+            axios.get('https://codingapple1.github.io/vue/more0.json')
+            .then( (a) => {
+                console.log('여기 a.data는 : ', a.data)
+                //a.data
+
+                // commit을 쓰기 위해서는 getData() 함수의 파라미터 안에 context를 기입해준다.
+                context.commit('setMore', a.data)
+
+            })
+        },
+    }
 })
 
 export default store
