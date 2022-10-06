@@ -20,6 +20,9 @@
         $store.commit('함수명') 으로 작성가능하다.   -->
   <button @click="$store.commit('changeAge')"> 나이변경 </button>
   <!-- <button @click="$store.commit('changeAge', 10)"> 나이변경 </button> -->
+  <!-- 아래 버튼 태그는 ...mapMutations([]) 를 사용했을 때 사용할 수 있는 간단한 함수명 명령법 -->
+  <!-- <button @click="changeAge()"> 나이변경 </button> -->
+  
 
   <p> {{ $store.state.more }} </p>
   <button @click="$store.dispatch('getData')">더보기 버튼</button> 
@@ -27,6 +30,16 @@
 
   <Container @write="writings = $event" :images="images" :postData="postData" :step="step" />
   <button @click="more">더보기</button>
+
+  <!-- 22.10.06 <computed:{}와 methods:{}와의 비교 관계> -->
+  <!-- now1() => methods:{} 안에 있는 함수는 () 괄호까지 포함해서 기입해주기 -->
+  <!-- <p> {{now1()}} {{counter}} </p> -->
+  <!-- now2 => computed:{} 안에 있는 함수는 () 괄호는 뺀 함수명만 기입해주기 -->
+  <!-- <p> {{now2}} {{counter}} </p> -->
+  <!-- <button @click="counter++">now버튼</button> -->
+  <!-- <p> {{ name }} </p> -->
+  <p> ...mapState의 object으로 넣었을 때 : {{ name }} {{ age }} {{ likes }}</p>
+  <p> ...mapState의 object으로 넣고 작명했을 때 : {{ myName }} {{ myAge }} {{ myLikes }}</p>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -61,6 +74,9 @@ import axios from 'axios'
 // 추가 후, src폴더 안에 store.js 파일을 생성했음 (파일 명은 임의지만 보면 store)
 // 추가 후, main.js에 import store 추가해줬음
 
+// 2022년 10월 6일 vuex state를 위한 ...mapState를 사용하기
+import {mapMutations, mapState} from 'vuex'
+
 
 export default {
   name: 'App',
@@ -75,7 +91,33 @@ export default {
       images : '',
       writings : '',
       selectedFilter : '',
+
+      counter : 0,
     }
+  },
+
+  // methods:{} 처럼 함수들을 만들 때.
+  // methods:{} 처럼 함수들 집합이지만 페이지 로딩 후에 한번 함수진행을 하고 두번 다시 결과를 내놓지 않는다.
+  // => 계산결과 저장용으로 쓰여지는 함수들의 집합체이다.
+  // computed:{} 는 반드시 return 타입을 제시해서 마쳐야한다.
+  computed: {
+    // 예시
+    // now2() {
+    //   return new Date()
+    //   // new Date() => 현재 시간을 알려준다.
+    // },
+
+    name() {
+      return this.$store.state.name
+    },
+
+    // vuex state를 여러개를 나누지 않고 한번에 꺼내쓰려면
+    // ...mapState 를 사용한다.
+    // ...mapState를 사용하기 위해선 import가 선행되어야 한다.
+    ...mapState(['name', 'age', 'likes', 'pushedLike']),
+
+    // ...mapState() 에는 object 자료를 넣을 수도 있다.
+    ...mapState({ myName : 'name', myAge : 'age', myLikes : 'likes'}),
   },
 
   // 22년 10월 5일 mitt 라이브러리를 활용해 mounted()에 데이터를 넘기기
@@ -86,7 +128,13 @@ export default {
     })
   },
 
+  // 함수들을 만들 때.
   methods: {
+
+    // 2022년 10월 6일 vuex mutations 함수(store.js안에 있음)들을 한번에 꺼내 쓰려면
+    // ...mapMutations(['함수명']) 을 기입한다.
+    // 이렇게 되면 $store.commit 명령어를 직접 치지 않아도 된다.
+    ...mapMutations(['setMore', '좋아요', 'changeAge']),
 
     more() {
       axios.get('https://codingapple1.github.io/vue/more0.json').then(
@@ -154,7 +202,12 @@ export default {
       }
       this.postData.unshift(myPosts)  // unshift => 왼쪽에 array에 자료를 집어넣어준다.
       this.step = 0
-    }
+    },
+
+    now1() {
+      return new Date()
+      // new Date() => 현재 시간을 알려준다.
+    },
     
   },
 

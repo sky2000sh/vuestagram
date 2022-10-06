@@ -50,6 +50,7 @@ const store = createStore({
     },
 
     // actions => 서버에서 ajax를 통해 전달되는 곳!
+    // 다른 vue 파일에 ...mapActions()를 사용할 수도 있다. => 한개씩 주고받는게 아닌 여러개를 꺼내쓰기 위함임.
     actions : {
         getData(context) {
             axios.get('https://codingapple1.github.io/vue/more0.json')
