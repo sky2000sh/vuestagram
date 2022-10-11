@@ -59,7 +59,7 @@ const store = createStore({
                 //a.data
 
                 // commit을 쓰기 위해서는 getData() 함수의 파라미터 안에 context를 기입해준다.
-                // context.commit('setMore', a.data)
+                context.commit('setMore', a.data)
 
             })
         },
